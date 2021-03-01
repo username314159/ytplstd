@@ -13,4 +13,3 @@ for url in pl:
     YouTube(url).streams.filter(only_audio=True).first().download(dest_path)
 
 
-from pytube import Playlist
