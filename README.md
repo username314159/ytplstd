@@ -9,3 +9,5 @@
 
 
 ytplstd requires python3 and pytube (pip3 install -r reqirements.txt)
+
+NOTE: You need ffmpeg installed on your host
