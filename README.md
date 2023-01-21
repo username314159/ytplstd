@@ -1,6 +1,6 @@
 # ytplstd is a Playlist downloader for YouTube
 
-##Create and acrtivate venv
+## Create and activate venv
 
 `1. python -m venv env `\
 `2. source env/bin/activate ` \
