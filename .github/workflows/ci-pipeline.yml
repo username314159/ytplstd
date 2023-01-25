@@ -1,0 +1,37 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI-Pipeline MAIN
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the dev branch
+  push:
+   # types: [ closed ]
+    branches: main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    #if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE,w so your job can access it
+      - name: Checkout stage
+        uses: actions/checkout@v3
+      
+      - name: Build, tag, and push image to dockerhub
+        env:
+          REGISTRY: mirsad3141
+          REPOSITORY: ytplstd
+          GIT_TAG: $(git rev-parse --short=7 HEAD)
+          
+        run: |
+          docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASS }}
+          docker build -t $REGISTRY/REPOSITORY:$GIT_TAG . 
+          docker tag $REGISTRY/REPOSITORY:$GIT_TAG $REGISTRY/REPOSITORY:latest
+          docker push $REGISTRY/REPOSITORY:$GIT_TAG 
+          docker push $REGISTRY/REPOSITORY:latest
+          
+      # Runs a set of commands using the runners shell
