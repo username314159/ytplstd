@@ -30,7 +30,7 @@ jobs:
           GIT_TAG=$(git rev-parse --short=7 HEAD)
           docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASS }}
           docker build -t $REGISTRY/$REPOSITORY:$GIT_TAG . 
-          docker tag $REGISTRY/$REPOSITORY:$GIT_TAG $REGISTRY/REPOSITORY:latest
+          docker tag $REGISTRY/$REPOSITORY:$GIT_TAG $REGISTRY/$REPOSITORY:latest
           docker push $REGISTRY/$REPOSITORY:$GIT_TAG 
           docker push $REGISTRY/$REPOSITORY:latest
           
